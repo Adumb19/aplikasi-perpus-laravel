@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
 
-        //ORM between users and levels
+        //ORM with levels table
         $data = User::with('level')->orderBy('id', 'desc')->get();
         
         return view('user.index', compact('data'));
