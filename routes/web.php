@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\LoginController;
@@ -18,3 +19,4 @@ Route::resource('dashboard', DashboardController::class);
 Route::resource('user', UserController::class);
 Route::resource('level', LevelController::class);
 Route::resource('member', MemberController::class);
+Route::resource('book', BookController::class);

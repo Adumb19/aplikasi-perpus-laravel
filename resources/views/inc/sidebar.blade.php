@@ -41,6 +41,7 @@
                 <a class="collapse-item" href="{{ route('user.index') }}">Pengguna</a>
                 <a class="collapse-item" href="{{ route('level.index') }}">Level</a>
                 <a class="collapse-item" href="{{ route('member.index') }}">Anggota</a>
+                <a class="collapse-item" href="{{ route('book.index') }}">Buku</a>
             </div>
         </div>
     </li>
