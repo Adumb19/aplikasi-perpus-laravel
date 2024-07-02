@@ -2,35 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Member;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class MemberController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('login');
-    }
+        $data = Member::orderBy('id', 'desc')->get();
 
-    public function actionLogin(Request $request)
-    {
-
-        return redirect()->to('dashboard');
-
-        // $request->validate([
-        //     'email' => 'required'
-        // ]);
-
-        // $credentials = $request->only('email', 'password');
-        // if (Auth::attempt($credentials)) {
-        //     $request->session()->regenerate();
-        //     return redirect()->route('dashboard');
-        // }
-        // return redirect('login')->withErrors('Login gagal');
+        return view('member.index', compact('data'));
     }
 
     /**
@@ -38,7 +22,7 @@ class LoginController extends Controller
      */
     public function create()
     {
-        //
+        return view('member.create');
     }
 
     /**
@@ -46,7 +30,9 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Member::create($request->all());
+
+        return redirect()->to('member');
     }
 
     /**
@@ -62,7 +48,9 @@ class LoginController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $edit = Member::find($id);
+
+        return view('member.edit', compact('edit'));
     }
 
     /**
@@ -70,7 +58,13 @@ class LoginController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Member::where('id', $id)->update([
+            'nama_anggota' => $request->nama_anggota,
+            'email' => $request->email,
+            'no_telp' => $request->no_telp
+        ]);
+
+        return redirect()->to('member');
     }
 
     /**
@@ -78,6 +72,8 @@ class LoginController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Member::where('id', $id)->delete();
+
+        return redirect()->to('member');
     }
 }
