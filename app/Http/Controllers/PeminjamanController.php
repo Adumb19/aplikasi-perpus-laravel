@@ -2,35 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Borrower;
 use Illuminate\Http\Request;
 
-class TransactionController extends Controller
+class PeminjamanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('transaksi.index');
-    }
-
-    public function indexPeminjaman()
-    {
-        
         return view('peminjaman.index');
     }
 
-    public function indexPengembalian()
-    {
-        
-        return view('pengembalian.index');
-    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $data = Borrower::with('member')->orderBy('id', 'desc')->get();
+
+        $kode_transaksi = Borrower::orderBy('id', 'desc')->first();
+        $huruf = "TR";
+        $urutan = $kode_transaksi->id;
+
+        $kode_transaksi = $huruf . date('dmY') . sprintf($urutan);
+        
+        return view('peminjaman.create', compact('data', 'kode_transaksi'));
     }
 
     /**

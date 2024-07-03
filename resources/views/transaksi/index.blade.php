@@ -18,9 +18,9 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Halaman Dashboard</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Data Tansaksi</h1>
 
-                </div>
+                    <p>Lorem ipsum dolor sit amet.</p>
                 <!-- /.container-fluid -->
 
             </div>

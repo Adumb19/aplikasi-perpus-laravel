@@ -4,27 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TransactionController extends Controller
+class PengembalianController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('transaksi.index');
-    }
-
-    public function indexPeminjaman()
-    {
-        
-        return view('peminjaman.index');
-    }
-
-    public function indexPengembalian()
-    {
-        
         return view('pengembalian.index');
     }
+
     /**
      * Show the form for creating a new resource.
      */
