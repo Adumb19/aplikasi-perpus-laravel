@@ -34,21 +34,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($member as $key => $d)
+                                @foreach ($data as $key => $d)
                                 <tr>
                                     <td>
                                         {{ $loop->iteration }}
                                     </td>
                                     <td>
-                                        {{ $d->nama_anggota }}
+                                        {{ $d->member->nama_anggota }}
                                     </td>
                                     <td>
                                         {{ $d->no_transaksi }}
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-ss bg-primary">Detail</a>
-                                        <a href="" class="btn btn-ss bg-danger">Delete</a>
-                                        <a href="" class="btn btn-ss bg-info">Print</a>
+                                        <a href="" class="btn btn-ss btn-primary">Detail</a>
+                                        <a href="" class="btn btn-ss btn-danger">Delete</a>
+                                        <a href="" class="btn btn-ss btn-info">Print</a>
                                         {{-- <form action="{{ route('level.destroy', $d->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">

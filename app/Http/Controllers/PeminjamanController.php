@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Borrower;
+use App\Models\Borrowerdetail;
 use App\Models\Member;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,8 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        $member = Member::orderBy('id', 'desc')->get();
-        return view('peminjaman.index', compact('member'));
+        $data = Borrower::with('member')->orderBy('id', 'desc')->get();
+        return view('peminjaman.index', compact('data'));
     }
 
     /**
@@ -41,10 +42,21 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
+        return $request;
         Borrower::create([
-            'nama_anggota' => $request->nama_anggota,
+            'id_anggota' => $request->id_anggota,
             'no_transaksi' => $request->no_transaksi
         ]);
+
+        foreach ($request->id_buku as $key) {
+            Borrowerdetail::create([
+                'id_peminjam' => $request->id,
+                'id_buku' => $request->id_buku[$key],
+                'tgl_peminjaman' => $request->tgl_peminjaman[$key],
+                'tgl_pengembalian' => $request->tgl_pengembalian[$key],
+                'keterangan' => $request->keterangan[$key],
+            ]);
+        }
 
         return redirect()->to('level');
     }

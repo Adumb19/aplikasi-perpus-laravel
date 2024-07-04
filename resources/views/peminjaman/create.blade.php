@@ -20,7 +20,7 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Tambah Peminjam</h1>
                    
-                    <form action="" method="">
+                    <form action="{{ route('peminjaman.store') }}" method="post">
                         @csrf
                         <div class="mb-3 row">
                             <div class="col-3">
@@ -28,15 +28,15 @@
                                 <select class="form-control" name="id_anggota" id="">
                                     <option value="">Pilih Anggota</option>
                                     @foreach ($data as $key => $d)
-                                    <option value="">{{ $d->member->nama_anggota }}</option>
+                                    <option value="{{ $d->id }}">{{ $d->member->nama_anggota }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-3">
-                                <button class="btn btn-primary">Tambah Anggota</button>
+                            <div class="col-3 pt-4">
+                                <a href="{{ route('member.create') }}" class="btn btn-primary">Tambah Anggota</a>
                             </div>
                             <div class="mb-3">
-                                <label for="">No. Transaksi</label>
+                                <label for="">Kode Transaksi</label>
                                 <input type="text" name="no_transaksi" class="form-control" value="{{ $kode_transaksi }}">
                             </div>
                         </div>
@@ -50,6 +50,7 @@
                                         <th>Nama Buku</th>
                                         <th>Tanggal Peminjaman</th>
                                         <th>Tanggal Pengembalian</th>
+                                        <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -59,15 +60,18 @@
                                             <select name="id_buku[]" class="form-control">
                                                 <option value="">Pilih Buku</option>
                                                 @foreach ($buku as $b)
-                                                <option value="">{{ $b->judul }}</option>
+                                                <option value="{{ $b->id }}">{{ $b->judul }}</option>
                                                 @endforeach
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="date" name="tgl_pinjam[]" id="" class="form-control">
+                                            <input type="date" name="tgl_peminjaman[]" class="form-control">
                                         </td>
                                         <td>
-                                            <input type="date" name="tgl_pengembalian[]" id="" class="form-control">
+                                            <input type="date" name="tgl_pengembalian[]" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="keterangan[]" class="form-control">
                                         </td>
                                         <td>
                                             Hapus
@@ -117,13 +121,15 @@
             newRow += "<td><select name='id_buku[]' class='form-control'>";
             newRow += "<option value=''>Pilih Buku</option>";
             newRow += "@foreach ($buku as $b)";
-            newRow += "<option value=''>{{ $b->judul }}</option>";
-            newRow += "@endforeach"
+            newRow += "<option value='{{ $b->id }}'>{{ $b->judul }}</option>";
+            newRow += "@endforeach";
             newRow += "</select></td>";
 
-            newRow += "<td><input type='date' name='tgl_pinjam[]' class='form-control'></td>"
+            newRow += "<td><input type='date' name='tgl_peminjaman[]' class='form-control'></td>";
 
             newRow += "<td><input type='date' name='tgl_pengembalian[]' class='form-control'></td>";
+
+            newRow += "<td><input type='text' name='keterangan[]' class='form-control'></td>";
 
             newRow += "<td>Hapus</td>";
 
