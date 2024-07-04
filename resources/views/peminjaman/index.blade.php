@@ -28,33 +28,27 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Nama Anggota</th>
                                     <th>No. Transaksi</th>
-                                    <th>Keterangan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($data as $key => $d) --}}
+                                @foreach ($member as $key => $d)
                                 <tr>
                                     <td>
-                                        {{-- {{ $loop->iteration }} --}}
+                                        {{ $loop->iteration }}
                                     </td>
                                     <td>
-                                        {{-- {{ $d->no_transaksi }} --}}
+                                        {{ $d->nama_anggota }}
                                     </td>
                                     <td>
-                                        {{-- {{ $d->id_anggota }} --}}
+                                        {{ $d->no_transaksi }}
                                     </td>
                                     <td>
-                                        <a href="
-                                        {{-- {{ route('level.edit', $d->id) }} --}}
-                                         " class="btn btn-ss bg-success">Detail</a>
-                                        <a href="
-                                        {{-- {{ route('level.edit', $d->id) }} --}}
-                                         " class="btn btn-ss bg-success">Delete</a>
-                                        <a href="
-                                        {{-- {{ route('level.edit', $d->id) }} --}}
-                                         " class="btn btn-ss bg-success">Print</a>
+                                        <a href="" class="btn btn-ss bg-primary">Detail</a>
+                                        <a href="" class="btn btn-ss bg-danger">Delete</a>
+                                        <a href="" class="btn btn-ss bg-info">Print</a>
                                         {{-- <form action="{{ route('level.destroy', $d->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
@@ -62,7 +56,7 @@
                                         </form> --}}
                                     </td>
                                 </tr>
-                                {{-- @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -92,25 +86,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('inc.logout')
 
     @include('inc.js')
 </body>

@@ -17,6 +17,11 @@ class Borrower extends Model
 
     public function member()
     {
-        return $this->belongsTo(Member::class, 'id_anggota', 'id');
+        return $this->belongsTo(Member::class, 'id_anggota', 'id', 'nama_anggota');
+    }
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class, 'judul');
     }
 }

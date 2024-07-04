@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Borrower;
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
@@ -12,7 +14,8 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        return view('peminjaman.index');
+        $member = Member::orderBy('id', 'desc')->get();
+        return view('peminjaman.index', compact('member'));
     }
 
     /**
@@ -26,9 +29,11 @@ class PeminjamanController extends Controller
         $huruf = "TR";
         $urutan = $kode_transaksi->id;
 
-        $kode_transaksi = $huruf . date('dmY') . sprintf($urutan);
+        $kode_transaksi = $huruf . date('dmY') . sprintf("%03s", $urutan);
+
+        $buku = Book::orderBy('id','desc')->get();
         
-        return view('peminjaman.create', compact('data', 'kode_transaksi'));
+        return view('peminjaman.create', compact('data', 'kode_transaksi', 'buku'));
     }
 
     /**
@@ -36,7 +41,12 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Borrower::create([
+            'nama_anggota' => $request->nama_anggota,
+            'no_transaksi' => $request->no_transaksi
+        ]);
+
+        return redirect()->to('level');
     }
 
     /**

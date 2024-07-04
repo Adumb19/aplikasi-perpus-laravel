@@ -42,13 +42,13 @@
                         </div>
                         <div class="table-transaction">
                             <div align="right" class="mb-3">
-                                <button class="btn btn-sm btn-primary mx-3 btn-add">Tambah Buku</button>
+                                <button type="button" class="btn btn-sm btn-primary mx-3" id="btn-add">Tambah Buku</button>
                             </div>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>Nama Buku</th>
-                                        <th>Tanggal Pinjaman</th>
+                                        <th>Tanggal Peminjaman</th>
                                         <th>Tanggal Pengembalian</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -58,7 +58,9 @@
                                         <td>
                                             <select name="id_buku[]" class="form-control">
                                                 <option value="">Pilih Buku</option>
-                                                <option value=""></option>
+                                                @foreach ($buku as $b)
+                                                <option value="">{{ $b->judul }}</option>
+                                                @endforeach
                                             </select>
                                         </td>
                                         <td>
@@ -74,6 +76,8 @@
                                 </tbody>
                             </table>
                         </div>
+                        <input type="submit" value="Simpan" class="btn btn-primary">
+                        <input type="button" value="Kembali" class="btn btn-info">
                     </form>
                 <!-- /.container-fluid -->
 
@@ -101,32 +105,34 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('inc.logout')
+
+    @include('inc.js')
 
     <script>
-        $('.btn-add').click(function(){
-            alert('duarrrr')
-        })
+        $('#btn-add').click(function() {
+            let tbody = $('tbody');
+            let newRow = '<tr>';
+
+            newRow += "<td><select name='id_buku[]' class='form-control'>";
+            newRow += "<option value=''>Pilih Buku</option>";
+            newRow += "@foreach ($buku as $b)";
+            newRow += "<option value=''>{{ $b->judul }}</option>";
+            newRow += "@endforeach"
+            newRow += "</select></td>";
+
+            newRow += "<td><input type='date' name='tgl_pinjam[]' class='form-control'></td>"
+
+            newRow += "<td><input type='date' name='tgl_pengembalian[]' class='form-control'></td>";
+
+            newRow += "<td>Hapus</td>";
+
+            newRow += '</tr>';
+
+            tbody.append(newRow);
+        });
     </script>
-    @include('inc.js')
+    
 </body>
 
 </html>
